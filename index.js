@@ -194,7 +194,7 @@ app.get('/article-edit/:id', function (req, res) {
 
   const query = `SELECT * FROM articles WHERE id = ${id};`;
 
-  dbConnetion.getConnection((err, conn) => {
+  dbConnection.getConnection((err, conn) => {
     if (err) throw err;
 
     conn.query(query, (err, results) => {
