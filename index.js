@@ -224,7 +224,7 @@ app.post('/article-edit', uploadFile('image'), function (req, res) {
 
   const query = `UPDATE articles SET title = "${title}", content = "${content}", image = "${image}" WHERE id = ${id}`;
 
-  dbConnetion.getConnection((err, conn) => {
+  dbConnection.getConnection((err, conn) => {
     // if (err) throw err;
     if (err) {
       console.log(err);
