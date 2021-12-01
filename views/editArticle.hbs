@@ -1,0 +1,44 @@
+{{> header}}
+{{> navbar}}
+
+{{#if message}}
+<div class="alert alert-{{message.type}}" role="alert">
+    {{message.message}}
+</div>
+{{/if}}
+
+<div class="container text-center pt-5">
+    <form action="/article-edit" method="POST" enctype="multipart/form-data">
+        <input type="hidden" value="{{article.id}}" name="id">
+        <input type="hidden" value="{{article.image}}" name="oldImage">
+        <input type="hidden" value="{{article.image}}" id="url-thumbnail">
+        <div class="file-input-group text-start">
+            <input type="file" hidden id="file" aria-label="File browser example" name="image"
+                onchange="handleChange()">
+            <label for="file">Attache Thumbnail <img src="/public/icons/attach.svg" alt=""></label>
+        </div>
+        <div id="preview-thumbnail" class="text-start"></div>
+        <div>
+            <input type="text" placeholder="Title" name="title" value="{{article.title}}">
+        </div>
+        <div>
+            <textarea placeholder="Article Content" name="content">{{article.content}}</textarea>
+        </div>
+        <div class="text-end">
+            <button class="btn-submit-article">Submit</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    const previewElement = document.getElementById('preview-thumbnail');
+    const urlThumbnail = document.getElementById('url-thumbnail').value;
+    previewElement.innerHTML = `<img src="${urlThumbnail}" style="width: 250px; margin-left: 170px;" class="mb-3"/>`;
+
+    function handleChange() {
+        const value = URL.createObjectURL(event.target.files[0]);
+        previewElement.innerHTML = `<img src="${value}" style="width: 250px; margin-left: 170px;" class="mb-3"/>`
+    }
+</script>
+
+{{> footer}}

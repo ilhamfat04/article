@@ -1,11 +1,18 @@
 {{> header}}
+{{#if message}}
+<div class="alert alert-{{message.type}}" role="alert">
+    {{message.message}}
+</div>
+{{/if}}
 {{> navbar}}
 
 <div class="container text-center pt-5">
     <form action="/article-add" method="POST" enctype="multipart/form-data">
         <div class="file-input-group text-start">
-            <label for="file">Attache Thumbnail <img src="/public/icons/attach.svg" alt=""></label>
+            <input type="file" hidden id="file" name="image" onchange="handleChange()">
+            <label for="file">Attach Thumbnail <img src="/public/icons/attach.svg" alt=""></label>
         </div>
+        <div id="preview-thumbnail" class="text-start"></div>
         <div>
             <input type="text" placeholder="Title" name="title" value="Ini judul artikel">
         </div>
@@ -17,5 +24,13 @@
         </div>
     </form>
 </div>
+
+<script>
+    function handleChange() {
+        let previewElement = document.getElementById('preview-thumbnail')
+        const value = URL.createObjectURL(event.target.files[0])
+        previewElement.innerHTML = `<img src="${value}" style="width:250px; margin-left:175px;" class="mb-3"/>`
+    }
+</script>
 
 {{> footer}}
