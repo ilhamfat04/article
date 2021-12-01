@@ -1,0 +1,21 @@
+{{> header}}
+{{> navbar}}
+
+<div class="container text-center pt-5">
+    <form action="/article-add" method="POST" enctype="multipart/form-data">
+        <div class="file-input-group text-start">
+            <label for="file">Attache Thumbnail <img src="/public/icons/attach.svg" alt=""></label>
+        </div>
+        <div>
+            <input type="text" placeholder="Title" name="title" value="Ini judul artikel">
+        </div>
+        <div>
+            <textarea placeholder="Article Content" name="content"></textarea>
+        </div>
+        <div class="text-end">
+            <button class="btn-submit-article">Submit</button>
+        </div>
+    </form>
+</div>
+
+{{> footer}}
